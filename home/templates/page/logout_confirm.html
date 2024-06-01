@@ -1,0 +1,78 @@
+{% extends "pages/home.html" %}
+
+{% block title %}
+BanLinhKien.com | Cửa hàng bán linh kiện TP.HCM
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="logout-card">
+        <h2>Đăng xuất</h2>
+        <p>Bạn có chắc chắn muốn đăng xuất không?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Đăng xuất</button>
+            <a href="{% url 'index' %}" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+</div>
+<style>
+    /* Style for logout confirmation */
+    .logout-card {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .logout-card h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .logout-card p {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .logout-card form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logout-card .btn {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+
+    .logout-card .btn-danger {
+        background-color: #dc3545; /* Bootstrap danger color */
+        color: #fff;
+        border: none;
+    }
+
+    .logout-card .btn-danger:hover {
+        background-color: #c82333; /* Darker shade of red */
+    }
+
+    .logout-card .btn-secondary {
+        background-color: #6c757d; /* Bootstrap secondary color */
+        color: #fff;
+        border: none;
+    }
+
+    .logout-card .btn-secondary:hover {
+        background-color: #5a6268; /* Darker shade of gray */
+    }
+
+</style>
+{% endblock %}

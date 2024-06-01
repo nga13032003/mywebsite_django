@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}BanLinhKien.com | Cửa hàng bán linh kiện TP.HCM{% endblock %}</title>
+
+    {% load static %}
+    <link href="{% static 'images/python.png' %}" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" type="text/css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #f7f7f7;
+            padding: 20px;
+            display: flex; /* Sử dụng flexbox để căn chỉnh header */
+            justify-content: space-between; /* Căn phân chia khoảng trống giữa logo và menu */
+            align-items: center; /* Căn dọc logo và menu vào giữa */
+        }
+
+        .navigation ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navigation li {
+            margin: 0 20px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: #1e90ff;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #f7f7f7;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .footer .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer .footer-section {
+            width: 22%; /* Điều chỉnh độ rộng của mỗi phần trong footer */
+            margin-bottom: 20px;
+        }
+        
+        .footer .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .footer .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .footer .footer-section ul li {
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        
+        .footer .footer-section ul li a {
+            text-decoration: none;
+            color: #1e90ff;
+        }
+        
+        .footer .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+        
+
+        .navigation li.logo img {
+            height: 30px; /* Đặt chiều cao của logo */
+            width: auto; /* Chiều rộng tự động điều chỉnh */
+            margin: 0; /* Xóa margin để logo không có khoảng cách xung quanh */
+        }
+        .navigation ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navigation li {
+            margin: 0 20px;
+        }
+        
+        .navigation a {
+            text-decoration: none;
+            color: #1e90ff;
+            font-weight: bold;
+            font-size: 20px;
+            position: relative;
+        }
+        
+        .navigation a img {
+            height: 30px; /* Adjust icon size */
+            width: auto;
+            margin-right: 5px; /* Adjust spacing between icon and text */
+        }
+        
+        .navigation a #cart-count {
+            position: absolute;
+            top: -5px; /* Adjust vertical positioning as needed */
+            right: -10px; /* Adjust horizontal positioning as needed */
+            background-color: #ff4500; /* Adjust background color */
+            color: white; /* Adjust text color */
+            font-size: 12px; /* Adjust font size */
+            padding: 2px 6px; /* Adjust padding */
+            border-radius: 50%; /* Make it circular */
+        }
+        
+        #banner {
+            
+            width: 100%%;
+            margin-left: 210px;
+            height: 400px; /* Điều chỉnh chiều cao của banner tại đây */
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 20px;
+            animation: slideshow 15s infinite; /* Chuyển động banner mỗi 3s */
+        }
+        
+        .navigation li.logo img {
+            height: 30px; /* Đặt chiều cao của logo */
+            width: auto; /* Chiều rộng tự động điều chỉnh */
+            margin-right: 20px; /* Khoảng cách phải giữa logo và menu */
+        }
+
+        #menu {
+            margin-bottom: 20px;
+            float: left; /* Cho phần menu nằm bên trái */
+            width: 200px; 
+        }
+        #menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        #menu img {
+        max-width: 100%;
+        {% comment %} height: auto;
+        display: block;
+        overflow: hidden; /* Add this line */ {% endcomment %}
+        }
+        #menu li {
+            margin-bottom: 1px;
+            background-color: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        #menu h2{
+            font-size: 22px;
+            font-weight: bold;
+        }
+        #menu li a {
+            text-decoration: none; /* Loại bỏ gạch chân dưới */
+            color: black; /* Đặt màu chữ là đen */
+        }
+        
+        #menu li a:hover {
+            /* Thêm các hiệu ứng hover nếu cần */
+            color: #1e90ff; /* Màu chữ khi hover */
+        }
+        .row {
+            display: flex;
+        }
+        
+        #menu, #banner {
+            flex: 1;
+        }
+
+        @keyframes slideshow {
+            0% { background-image: url('{% static "images/banner1.jpg" %}'); }
+            33.33% { background-image: url('{% static "images/banner2.jpg" %}'); }
+            66.66% { background-image: url('{% static "images/banner3.jpg" %}'); }
+            100% { background-image: url('{% static "images/banner1.jpg" %}'); }
+        }
+        .topnav {
+            display: flex; /* Sử dụng flexbox để căn chỉnh */
+            align-items: center; /* Căn các phần tử vào giữa theo chiều dọc */
+        }
+        
+        .topnav input[type=text] {
+            padding: 6px; /* Điều chỉnh padding cho input */
+            margin-top: 8px; /* Khoảng cách phía trên input */
+            margin-right: 10px; /* Khoảng cách phía phải của input */
+            border: none; /* Loại bỏ viền của input */
+            font-size: 17px; /* Kích thước chữ cho input */
+            flex: 1; /* Kích thước input tự mở rộng */
+        }
+        
+        .topnav button {
+            padding: 6px; /* Điều chỉnh padding cho button */
+            margin-top: 8px; /* Khoảng cách phía trên button */
+            border: none; /* Loại bỏ viền của button */
+            background: none; /* Loại bỏ nền màu của button */
+            cursor: pointer; /* Biểu tượng con trỏ khi rê chuột vào */
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/home">
+                <img src="{% static 'images/logo.png' %}" alt="Logo">
+            </a>
+        </div>
+        <form action="{% url 'tim_kiem_san_pham' %}" method="GET">
+            <div class="topnav">
+                <input type="text" name="q" placeholder="Tìm kiếm...">
+                <button type="submit"><img src="{% static 'images/search.png' %}" alt="Search"></button>
+            </div>
+        </form>
+        
+        
+        <nav class="navigation">
+            <ul> 
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'cart' %}">
+                    <img src="{% static 'images/cart.png' %}" alt="Cart">
+                    {% if cart_items %}
+                        <span id="cart-count">{{ cart_items.count }}</span>
+                    {% endif %}
+                </a></li> 
+                <li><a href="{% url 'view_orders' %}"><img src="{% static 'images/package.png' %}" alt="Package"></a></li> 
+                {% else %}
+                <li><a href="{% url 'DangNhap' %}">
+                    <img src="{% static 'images/cart.png' %}" alt="Cart">
+                    {% if cart_items %}
+                        <span id="cart-count">{{ cart_items.count }}</span>
+                    {% endif %}
+                </a></li> 
+                <li><a href="{% url 'DangNhap' %}"><img src="{% static 'images/package.png' %}" alt="Package"></a></li> 
+                {% endif %}
+                
+
+                {% if user.is_authenticated %}
+
+                    <li><a href="{% url 'inbox' %}"> <img src="{% static 'images/message.png' %}" alt="Message"></a></li>
+                    <li><a href="#"> <img src="{% static 'images/user.png' %}" alt="User">{{ user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}"><img src="{% static 'images/logout.png' %}" alt="Logout"></a></li>
+                {% else %}
+                    <li><a class="nav-link" href="{% url 'DangNhap' %}">Đăng nhập</a></li>
+                    <li><a href="{% url 'register' %}">Đăng ký</a></li>
+                {% endif %}
+
+            </ul> 
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                
+                
+                <div id="menu">
+
+                    <h2><img src="{% static 'images/list.png' %}" alt="Danh mục loại"> &nbsp;Danh mục loại</h2>
+                    <ul>
+                        {% for tl in DM_loai %}
+                        <li style =" text-decoration: none,color: black;">
+                            <a href="{% url 'DSSPTheoLoai' ml=tl.pk %}">{{ tl.TenLoai }}</a>
+                        </li>
+                        
+                        {% endfor %}
+                    </ul>
+                    <ul>
+                        <li><a href="https://shope.ee/3pxD4gxGmV" target="_blank"><img src="https://pos.nvncdn.com/f2fe44-24897/bn/20210412_WzrRCXRoK2qXCNUYoNOqkTEm.gif" alt="spee"></a></li>
+                        <li><a href="https://www.tiktok.com/@banlinhkienretail?is_from_webapp=1&amp;sender_device=pc" target="_blank"><img src="https://pos.nvncdn.com/f2fe44-24897/bn/20231213_5EJmckUR.gif" alt="lazada"></a></li>
+                        <li><div id="countdown-container">
+                                <b style="align-text:center; color:red">Flash Sale</b>
+                                <div id="countdown">Hết giờ!</div>
+                                <div id="image-container">
+                                    <img src="{% static 'images/slideright1.jpg' %}" alt="Cart">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="banner"></div>
+                <div>
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Thông tin liên hệ:</h4>
+                <ul>
+                    <li>145/11/17 Thạnh Xuân 52, Quận 12, TP.HCM</li>
+                    <li>Số điện thoại: 0984630624</li>
+                    <li>Email: phanthithanhnga@gmail.com</li>
+                    <li>Website: <a href="https://www.haravan.com/haraweb">https://www.haravan.com/haraweb</a></li>
+                    <li>Fanpage: <a href="https://vi-vn.facebook.com/business/help/1664726753843273">https://vi-vn.facebook.com/business/help/1664726753843273</a></li>
+                    <li>Zalo: 0988797979</li>
+                </ul>
+            </div>
+        
+            <div class="footer-section">
+                <h4>Chính sách:</h4>
+                <ul>
+                    <li>Chính sách đổi trả: <a href="[Đường dẫn đến trang chi tiết chính sách đổi trả]">đổi trả sau 3 ngày</a></li>
+                    <li>Chính sách bảo hành: <a href="[Đường dẫn đến trang chi tiết chính sách bảo hành]">12 tháng</a></li>
+                    <li>Chính sách thanh toán: <a href="[Đường dẫn đến trang chi tiết chính sách thanh toán]">[Đường dẫn đến trang chi tiết chính sách thanh toán]</a></li>
+                    <li>Chính sách vận chuyển: <a href="[Đường dẫn đến trang chi tiết chính sách vận chuyển]">[Đường dẫn đến trang chi tiết chính sách vận chuyển]</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Hỗ trợ khách hàng:</h4>
+                <ul>
+                    <li>Tổng đài miễn phí: 18781617</li>
+                    <li>Email hỗ trợ: <a href="mailto:[Địa chỉ email hỗ trợ]">banlinhkien@gmail.com</a></li>
+                    <li>Câu hỏi thường gặp: <a href="[Đường dẫn đến trang câu hỏi thường gặp]">instagram.com/133.nga_a/</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Mạng xã hội:</h4>
+                <ul>
+                    <li><img src="{% static 'images/facebook.png' %}" alt="Facebook">Facebook: <a href="https://s.pro.vn/Z8oz">https://s.pro.vn/Z8oz</a></li>
+                    <li><img src="{% static 'images/zalo.png' %}" alt="Zalo">Zalo: 0988797979</li>
+                    <li><img src="{% static 'images/instagram.png' %}" alt="Instagram">Instagram: <a href="https://s.pro.vn/Z8oz">instagram.com/133.nga_a/</a></li>
+                    <li><img src="{% static 'images/youtube.png' %}" alt="YouTube">YouTube: <a href="https://s.pro.vn/Z8oz">https://s.pro.vn/Z8oz</a></li>
+                </ul>
+                <a href="https://www.tiktok.com/@banlinhkienretail?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noreferrer noopener"><img class="image_resized" style="height:130px;width:263px;" src="https://pos.nvncdn.com/f2fe44-24897/contentKey/20210609_CRadjzQMEY1F.gif" alt=""></a>
+            </div>
+        </div>
+    </footer>    
+    
+    <script>
+        // Thời gian cụ thể (định dạng: yyyy-mm-ddThh:mm:ss)
+        var targetTime = new Date("2024-12-31T00:00:00").getTime();
+    
+        // Cập nhật thời gian đếm ngược mỗi giây
+        var countdown = setInterval(function () {
+            var now = new Date().getTime();
+            var timeRemaining = targetTime - now;
+    
+            var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    
+            var countdownElement = document.getElementById("countdown");
+            countdownElement.innerHTML = days + "d - " + hours + "h - " + minutes + "m- " + seconds + "s.";
+    
+            if (timeRemaining <= 0) {
+                clearInterval(countdown);
+                countdownElement.innerHTML = "Hết giờ!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

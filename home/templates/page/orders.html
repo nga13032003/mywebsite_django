@@ -1,0 +1,64 @@
+{% extends "pages/home.html" %}
+
+{% block title %}BanLinhKien.com | Cửa hàng bán linh kiện TP.HCM{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Danh sách đơn hàng của {{ user.username }}</h1>
+    {% if orders %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã đơn hàng</th>
+                <th>Ngày đặt hàng</th>
+                <th>Tổng số tiền</th>
+                <th>Trạng thái đơn hàng</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.created_at }}</td>
+                <td>{{ order.total_amount }} VNĐ</td>
+                <td>{{ order.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Không có đơn hàng nào.</p>
+    {% endif %}
+</div>
+<style>
+    /* Căn giữa nội dung của các ô trong bảng */
+    .table {
+        width: 1000px;
+        border-collapse: collapse;
+        padding:10px;
+    }
+
+    .table th, .table td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Phần tiêu đề của bảng */
+    .table th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    /* Tương phản màu cho hàng chẵn và lẻ */
+    .table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Hover màu nền khi rê chuột vào hàng */
+    .table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+</style>
+{% endblock %}

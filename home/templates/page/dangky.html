@@ -1,0 +1,123 @@
+{% extends "pages/home.html" %}
+
+{% block title %} 
+BanLinhKien.com | Cửa hàng bán linh kiện TP.HCM
+{% endblock %} 
+
+{% block content %}
+<style>
+    .registration-form {
+        max-width: 400px;
+        margin: 40px auto;
+        padding: 25px;  /* Tăng thêm khoảng cách bên trong */
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  /* Thêm đổ bóng */
+    }
+
+    .form-group {
+        margin-bottom: 20px;  /* Tăng khoảng cách giữa các nhóm */
+    }
+
+    .form-label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;  /* Thêm khoảng cách giữa nhãn và đầu vào */
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px;  /* Tăng độ dày của đầu vào */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;  /* Đảm bảo rằng padding không thay đổi kích thước */
+    }
+
+    .error-messages {
+        color: red;
+        text-align: center;
+        margin-bottom: 20px;  /* Tăng khoảng cách dưới lỗi */
+    }
+
+    .submit-button {
+        width: 100%;
+        padding: 12px;  /* Tăng độ dày của nút bấm */
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;  /* Tạo chữ đậm cho nút bấm */
+        cursor: pointer;
+        transition: background-color 0.3s;  /* Thêm hiệu ứng chuyển đổi màu */
+    }
+
+    .submit-button:hover {
+        background-color: #218838;  /* Màu thay đổi khi trỏ chuột */
+    }
+
+    .registration-form a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.3s;  /* Hiệu ứng khi hover */
+    }
+
+    .registration-form a:hover {
+        text-decoration: underline;
+        color: #0056b3;  /* Thay đổi màu khi trỏ chuột */
+    }
+
+    .registration-form h1 {
+        text-align: center;
+        margin-bottom: 30px;  /* Thêm khoảng cách dưới tiêu đề */
+    }
+
+    .registration-form p {
+        text-align: center;
+    }
+</style>
+
+<div class="registration-form">
+    <form method="POST">
+        {% csrf_token %}
+        <h1>Đăng ký</h1>
+
+        {% if form.errors %}
+            <div class="error-messages">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ field.label }}: {{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label class="form-label">{{ form.username.label }}</label>
+            {{ form.username }}
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">{{ form.email.label }}</label>
+            {{ form.email }}
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">{{ form.password1.label }}</label>
+            {{ form.password1 }}
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">{{ form.password2.label }}</label>
+            {{ form.password2 }}
+        </div>
+
+        <button type="submit" class="submit-button">Đăng ký</button>
+
+        <p>Bạn đã có tài khoản chưa? <a href="{% url 'DangNhap' %}">Đăng nhập</a></p>
+        <p><a href="#">Quên mật khẩu?</a></p>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "pages/home.html" %}
+{% load static %}
+
+{% block title %}BanLinhKien.com | Cửa hàng bán linh kiện TP.HCM{% endblock %}
+
+{% block content %}
+<div class="product-list">
+    {% if query %}
+    <div><h2>Kết quả tìm kiếm cho: "{{ query }}"</h2></div><br><br>
+    {% else %}
+    <h2>Danh sách sản phẩm</h2>
+    {% endif %}
+    {% if sanphams %}
+    <div class="row">
+    {% for sp in sanphams %}
+    <div class="col-lg-3">
+        <div class="product-card">
+            <a href="{% url 'chiTietSanPham' pk=sp.pk %}">
+                <img src="{% static 'images/' %}{{ sp.HinhAnh }}" alt="{{ sp.TenSP }}" class="product-image">
+                <div class="product-info">
+                    <h3>{{ sp.TenSP }}</h3>
+                    <p>Giá: {{ sp.DonGia }} VND</p>
+                    <p>Số lượng: {{ sp.SoLuong }}</p>
+                </div>
+            </a>
+            <div class="product-actions">
+                <a href="{% url 'chiTietSanPham' pk=sp.pk %}" class="btn-red">Xem chi tiết</a>
+                <a href="{% url 'add_to_cart' sp.id %}"  class="link-green"><img src="{% static 'images/cart1.png' %}" alt="Cart"></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <p>Không có sản phẩm nào.</p>
+    {% endif %}
+</div>
+
+<style>
+.product-list {
+    margin-top: 50px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 100%; /* Ensure full height for equal columns */
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Increase shadow on hover */
+}
+.product-card a,d{
+    text-decoration: none;
+    color: black;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05); /* Slightly enlarge image on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Add shadow to image on hover */
+}
+
+.product-info {
+    flex-grow: 1; /* Ensures this section takes up remaining space */
+    padding: 15px;
+}
+
+.product-info h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.product-info p {
+    margin: 0 0 10px;
+}
+
+.product-actions {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-red {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-red:hover {
+    background-color: #cc463d;
+}
+
+.link-green {
+    color: #00aa00;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.link-green:hover {
+    color: #007700;
+}
+</style>
+
+{% endblock %}

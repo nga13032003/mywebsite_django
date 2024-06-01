@@ -1,0 +1,172 @@
+{% extends "pages/home.html" %}
+{% load static %}
+
+{% block title %}BanLinhKien.com | Cửa hàng bán linh kiện TP.HCM{% endblock %}
+
+{% block content %}
+<div class="row" id="product-container">
+    {% for sp in sanphams %}
+    <div class="col-lg-3 product-card" style="display: {% if forloop.counter <= 12 %}block{% else %}none{% endif %};">
+        {% if sp.khuyen_mai %}
+        <div class="promotion-badge">{{ sp.khuyen_mai }}</div>
+        {% endif %}
+        <img src="{% static 'images/' %}{{ sp.HinhAnh }}" alt="{{ sp.TenSP }}" class="product-image">
+        <div class="product-info">
+            <h3>{{ sp.TenSP }}</h3>
+            <p>Số lượng: {{ sp.SoLuong }}</p>
+            <p>Giá: {{ sp.DonGia }} VND</p>
+        </div>
+        <div class="product-actions">
+            <a href="{% url 'chiTietSanPham' sp.id %}" class="btn-red">Xem chi tiết</a>
+            <a href="{% url 'add_to_cart' sp.id %}"  class="link-green"><img src="{% static 'images/cart1.png' %}" alt="Cart"></a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="text-center">
+    <button id="load-more" class="btn-load-more">Xem thêm</button>
+</div>
+
+<style>
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    position: relative; /* Needed for the promotion badge positioning */
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 100%; /* Ensure full height for equal columns */
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Increase shadow on hover */
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05); /* Slightly enlarge image on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Add shadow to image on hover */
+}
+
+.product-info {
+    flex-grow: 1; /* Ensures this section takes up remaining space */
+    padding: 15px;
+}
+
+.product-info h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.product-info p {
+    margin: 0 0 10px;
+}
+
+.product-actions {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-red {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-red:hover {
+    background-color: #cc463d;
+}
+
+.link-green {
+    color: #00aa00;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.link-green:hover {
+    color: #007700;
+}
+
+.promotion-badge {
+    position: absolute;
+    background-color: red;
+    color: white;
+    padding: 1px 2px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.text-center {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.btn-load-more {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-load-more:hover {
+    background-color: #0056b3;
+}
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const loadMoreButton = document.getElementById("load-more");
+        const products = document.querySelectorAll(".product-card");
+        let visibleCount = 8;
+    
+        loadMoreButton.addEventListener("click", function() {
+            if (loadMoreButton.innerText === "Xem thêm") {
+                let newVisibleCount = visibleCount + 8;
+                for (let i = visibleCount; i < newVisibleCount && i < products.length; i++) {
+                    products[i].style.display = "block";
+                }
+                visibleCount = newVisibleCount;
+                if (visibleCount >= products.length) {
+                    loadMoreButton.innerText = "Ẩn bớt";
+                }
+            } else {
+                for (let i = 8; i < products.length; i++) {
+                    products[i].style.display = "none";
+                }
+                visibleCount = 8;
+                loadMoreButton.innerText = "Xem thêm";
+            }
+        });
+    });
+    </script>
+
+{% endblock %}

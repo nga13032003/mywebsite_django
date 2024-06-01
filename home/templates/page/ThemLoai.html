@@ -1,0 +1,13 @@
+{% extends "pages/home.html" %}
+
+{% block title %} Thêm thể loại {% endblock %}
+
+{% block content %}
+<h2 class="w-100 text-center p-3 text-danger"> Thêm thể loại </h2>
+
+<form action="{% url 'themLoai' %}" method="POST" class="form-container">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Thêm loại" class="btn btn-primary" />
+</form>
+{% endblock %}

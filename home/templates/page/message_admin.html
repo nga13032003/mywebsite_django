@@ -1,0 +1,23 @@
+{% extends "admin/change_form.html" %}
+
+{% block content %}
+<div class="messages">
+    <h2>Message Details</h2>
+    <ul>
+        <li>
+            <strong>From:</strong> {{ original.sender }}<br>
+            <strong>To:</strong> {{ original.receiver }}<br>
+            <strong>Message:</strong> {{ original.message }}<br>
+            <strong>Sent at:</strong> {{ original.timestamp }}
+        </li>
+    </ul>
+    {% if show_reply_form %}
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="reply">Reply:</label><br>
+        <textarea id="reply" name="reply" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Reply">
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

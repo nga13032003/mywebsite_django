@@ -1,0 +1,92 @@
+{% extends "pages/home.html" %} 
+
+{% block title %} 
+BanLinhKien.com | Cửa hàng bán linh kiện TP.HCM
+{% endblock %} 
+
+{% block content %}
+<style>
+    .login-form {
+        max-width: 400px; /* Giới hạn chiều rộng của form */
+        margin: 40px auto; /* Căn giữa form */
+        padding: 20px; /* Khoảng cách bên trong */
+        border: 1px solid #ccc; /* Đường viền form */
+        border-radius: 10px; /* Bo tròn góc */
+        background-color: #f9f9f9; /* Màu nền nhẹ */
+    }
+
+    .login-form h2 {
+        text-align: center; /* Căn giữa tiêu đề */
+        font-size: 24px; /* Tăng kích thước tiêu đề */
+        color: #dc3545; /* Màu đỏ cho tiêu đề */
+        padding-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+    }
+
+    .login-form p {
+        display: flex; /* Sử dụng flexbox để căn chỉnh các mục */
+        justify-content: space-between; /* Khoảng cách giữa nhãn và đầu vào */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        margin-bottom: 15px; /* Khoảng cách giữa các mục */
+    }
+
+    .login-form label {
+        font-weight: bold; /* Chữ đậm cho nhãn */
+    }
+    .login-form a{
+        text-decoration: none;
+        padding:10px;
+        text-align:center;
+    }
+    .login-form input[type="text"], 
+    .login-form input[type="password"] {
+        width: 70%; /* Chiếm 70% chiều rộng */
+        padding: 8px; /* Khoảng cách bên trong */
+        border: 1px solid #ccc; /* Đường viền */
+        border-radius: 5px; /* Bo tròn góc */
+    }
+
+    .login-form input[type="submit"] {
+        width: 100%; /* Nút submit chiếm toàn bộ chiều rộng */
+        padding: 10px; /* Khoảng cách bên trong */
+        border: none; /* Bỏ đường viền */
+        border-radius: 5px; /* Bo tròn góc */
+        background-color: #28a745; /* Màu xanh lá */
+        color: white; /* Màu chữ trắng */
+        font-size: 16px; /* Tăng cỡ chữ */
+        cursor: pointer; /* Con trỏ chuột */
+    }
+
+    .login-form input[type="submit"]:hover {
+        background-color: #218838; /* Màu khi hover */
+    }
+</style>
+
+<div class="login-form">
+    <h2>Đăng nhập</h2>
+    <form method="POST"> 
+        {% csrf_token %} 
+        {% if form.errors %} 
+            <div class="error-messages">
+                {% for key, value in form.errors.items %} 
+                    <p>{{ value }}</p> 
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <p>
+            <label for="username">Tài khoản:</label> 
+            <input type="text" id="username" name="username" required>
+        </p>
+        
+        <p>
+            <label for="password">Mật khẩu:</label> 
+            <input type="password" id="password" name="password" required>
+        </p>
+
+        <input type="hidden" name="next" value="/home" /> 
+        <input type="submit" value="Đăng nhập" /> 
+        <p><a class="nav-link text-black font-weight-bold" href="{% url 'password_reset' %}">Quên mật khẩu</a></p>
+
+    </form>
+</div>
+{% endblock %}

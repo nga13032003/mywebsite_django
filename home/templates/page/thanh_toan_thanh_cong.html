@@ -1,0 +1,62 @@
+{% extends "pages/home.html" %}
+
+{% block title %}BanLinhKien.com | Cửa hàng bán linh kiện TP.HCM{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Thanh toán thành công</h2>
+            <p>Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi!</p>
+            <p>Thông tin đơn hàng:</p>
+            <ul>
+                {% for ord in orders %}
+                <li><strong>Mã đơn hàng:</strong> {{ ord.id }}</li>
+                <li><strong>Ngày đặt hàng:</strong> {{ ord.created_at }}</li>
+                <li><strong>Tổng tiền:</strong> {{ ord.total_amount }} VND</li>
+                <li><strong>Địa chỉ giao hàng:</strong> {{ ord.shipping_address }}</li>
+                <li><strong>Phương thức thanh toán:</strong> {{ ord.payment_method }}</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'index' %}" class="btn btn-primary">Quay lại trang chủ</a>
+        </div>
+    </div>
+</div>
+<style>
+    .container {
+        margin-top: 20px;
+    }
+    
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    .card-title {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    
+    .btn-primary {
+        background-color: #007bff; /* Bootstrap's primary color */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-decoration: none;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker shade of primary color on hover */
+    }
+</style>
+
+{% endblock %}

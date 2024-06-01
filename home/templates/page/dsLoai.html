@@ -1,0 +1,65 @@
+{% extends "pages/home.html" %}
+
+{% block title %}
+BanLinhKien.com | Cửa hàng bán linh kiện TP.HCM
+{% endblock %}
+
+{% block content %}
+
+<style>
+    .table {
+        width: 75%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .table thead {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table tr:hover {
+        background-color: #ddd;
+    }
+
+    .table a {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .table a:hover {
+        color: #0056b3;
+    }
+</style>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã loại</th>
+            <th>Tên thể loại</th>
+            <th></th>
+        </tr>
+    </thead>
+    {% for tl in DM_loai %}
+    <tr> 
+        <td>{{ tl.id }}</td>
+        <td>{{ tl.TenLoai }}</td>
+        <td>
+            <a href="{% url 'DSSPTheoLoai' tl.id %}">
+                Xem sản phẩm theo loại
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
